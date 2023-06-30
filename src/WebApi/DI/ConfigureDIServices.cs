@@ -5,6 +5,7 @@ using Domain.Context;
 using Domain.Abstractions;
 using Infrastructure.Gateway.Options;
 using Infrastructure.Gateway;
+using Dapr.Client;
 
 namespace API.DI
 {
@@ -23,6 +24,8 @@ namespace API.DI
 
             services.AddTransient<IFeedGateway, FeedGateway>();
 
+            
+
             //Add Domain Contexts
 
             services.AddTransient<IGameContext, GameContext>();
@@ -32,6 +35,9 @@ namespace API.DI
             services.AddTransient<IGameService, GameService>();
 
             services.AddHttpClient();
+            services.AddDaprClient(services => services.Build());
+
+           
 
             return services;
         }

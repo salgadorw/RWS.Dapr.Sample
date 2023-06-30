@@ -14,6 +14,7 @@ using Domain.Context;
 using Domain.Models;
 using Infrastructure.Gateway;
 using Infrastructure.Gateway.Options;
+using Dapr.Client;
 
 namespace Tests
 {
@@ -50,7 +51,9 @@ namespace Tests
                     offset = off;
                     limit = lim;                    
                 });
-            var gameService = new GameService(gameContextMock.Object,mapper);
+
+           
+            var gameService = new GameService(gameContextMock.Object, mapper, new DaprClientBuilder().Build());
 
             //act
 
@@ -76,7 +79,7 @@ namespace Tests
             });
                     
                 
-            var gameService = new GameService(gameContextMock.Object, mapper);
+            var gameService = new GameService(gameContextMock.Object, mapper, new DaprClientBuilder().Build());
 
             //act
 
