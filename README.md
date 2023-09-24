@@ -1,7 +1,7 @@
 
-# YLD Gamming API Rafael Willwohl Salgado
+# Dapr Sample Rafael Willwohl Salgado
 
-The solution has 4 projects that helps to apply the DDD, clean architecture with solid principles.
+The solution has 4 projects that helps to apply the DDD with clean architecture and solid principles.
 
 # Assumptions 
 
