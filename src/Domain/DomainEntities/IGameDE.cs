@@ -1,8 +1,8 @@
 ﻿using Domain.Models;
 
-namespace Domain.Context
+namespace Domain.DomainEntities
 {
-    public interface IGameContext
+    public interface IGameDE
     {
         Task<PagedResult<Game>> GetGames(int offset, int limit, CancellationToken token);
        

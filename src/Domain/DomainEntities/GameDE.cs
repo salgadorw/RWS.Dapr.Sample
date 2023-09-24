@@ -1,14 +1,14 @@
 ﻿
-using Domain.Abstractions;
+using Domain.Contracts;
 using Domain.Exceptions;
 using Domain.Models;
 
-namespace Domain.Context
+namespace Domain.DomainEntities
 {
-    public class GameContext : IGameContext
+    public class GameDE : IGameDE
     {
         private readonly IFeedGateway feedGateway  ;
-        public GameContext(IFeedGateway feedGateway)
+        public GameDE(IFeedGateway feedGateway)
         {
             this.feedGateway = feedGateway;
         }

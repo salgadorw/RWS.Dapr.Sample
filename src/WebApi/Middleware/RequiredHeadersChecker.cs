@@ -14,9 +14,9 @@ namespace API.Middleware
 
         public async Task Invoke(HttpContext context, IOptions<RequiredHeadersOptions> options)
         {
-            if (options.Value.RequiredHeaders.Where(h=> !context.Request.Headers.Keys.Contains(h)).Count()>0)
+            if (!options.Value.RequiredHeaders.All(h=> context.Request.Headers.Keys.Contains(h)))
             {
-                context.Response.StatusCode = 400;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 var bodyString = $"Please send the required header(s):{string.Join(",",options.Value.RequiredHeaders)}" ;
                 byte[] data = Encoding.UTF8.GetBytes(bodyString);
                 context.Response.ContentType = "application/text";

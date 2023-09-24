@@ -1,17 +1,17 @@
-﻿using Domain.Abstractions;
+﻿using Domain.Contracts;
 using Moq;
 using Microsoft.Extensions.Options;
-using Domain.Context;
+using Domain.DomainEntities;
 using Domain.Exceptions;
 using Infrastructure.Gateway;
 using Infrastructure.Gateway.Options;
 
 namespace Tests
 {
-    public class GameDomainContextTests
+    public class GameDomainDomainEntitiesTests
     {
         private readonly IFeedGateway feedGateway;
-        public GameDomainContextTests() {
+        public GameDomainDomainEntitiesTests() {
 
             var optionsMoq= new Mock<IOptions<FeedGatewayOptions>>();
             optionsMoq.Setup(s=> s.Value).Returns(new FeedGatewayOptions() {
@@ -27,14 +27,14 @@ namespace Tests
         {
             //arrange
 
-            var gameContext = new GameContext(feedGateway);
+            var gameDomainEntities = new GameDE(feedGateway);
 
             
             //assert
 
                await Assert.ThrowsAsync<PageSizeIsTooLongException>(async ()=>
                                                                   //act
-                                                                  await gameContext.GetGames(0, 11, default));
+                                                                  await gameDomainEntities.GetGames(0, 11, default));
         }
 
         [Fact]
@@ -42,10 +42,10 @@ namespace Tests
         {
             //arrange
 
-            var gameContext = new GameContext(feedGateway);
+            var gameDomainEntities = new GameDE(feedGateway);
 
             //act
-            var result = await gameContext.GetGames(5, 5, default);
+            var result = await gameDomainEntities.GetGames(5, 5, default);
             //assert
 
             Assert.Equal(5,result.Items.Count);
@@ -55,10 +55,10 @@ namespace Tests
         {
             //arrange
 
-            var gameContext = new GameContext(feedGateway);
+            var gameDomainEntities = new GameDE(feedGateway);
 
             //act
-            var result = await gameContext.GetGames(0, 0, default);
+            var result = await gameDomainEntities.GetGames(0, 0, default);
 
             //assert
             Assert.Equal(0, result.Items.Count);

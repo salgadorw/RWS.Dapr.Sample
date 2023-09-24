@@ -9,8 +9,8 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Application.Mapping;
 using Application.Services;
-using Domain.Abstractions;
-using Domain.Context;
+using Domain.Contracts;
+using Domain.DomainEntities;
 using Domain.Models;
 using Infrastructure.Gateway;
 using Infrastructure.Gateway.Options;
@@ -20,7 +20,7 @@ namespace Tests
 {
     public class GameApplicationServiceTests
     {
-        private readonly Mock<IGameContext> gameContextMock;
+        private readonly Mock<IGameDE> gameDomainEntitiesMock;
         private readonly IFeedGateway feedGateway;
         private readonly IMapper mapper;
         public GameApplicationServiceTests() {
@@ -32,7 +32,7 @@ namespace Tests
 
             feedGateway = new FeedGateway(optionsMoq.Object, new HttpClient());
 
-            gameContextMock = new Mock<IGameContext>();
+            gameDomainEntitiesMock = new Mock<IGameDE>();
             var config = new MapperConfiguration(cfg => cfg.AddProfile<MapperProfile>());
             mapper = config.CreateMapper();           
 
@@ -44,7 +44,7 @@ namespace Tests
             //arrange
             int offset=0;
             int limit =0;
-            gameContextMock
+            gameDomainEntitiesMock
                 .Setup(s => s.GetGames(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(feedGateway.GetGames(0,2, default))
                 .Callback<int, int, CancellationToken>(async (off, lim, cancelToken) =>
                 {
@@ -53,7 +53,7 @@ namespace Tests
                 });
 
            
-            var gameService = new GameService(gameContextMock.Object, mapper, new DaprClientBuilder().Build());
+            var gameService = new GameService(gameDomainEntitiesMock.Object, mapper, new DaprClientBuilder().Build());
 
             //act
 
@@ -70,7 +70,7 @@ namespace Tests
             //arrange
             int offset = 0;
             int limit = 0;
-            gameContextMock
+            gameDomainEntitiesMock
                 .Setup(s => s.GetGames(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(async () => {
 
                     var result = await feedGateway.GetGames(5, 5, default);
@@ -79,7 +79,7 @@ namespace Tests
             });
                     
                 
-            var gameService = new GameService(gameContextMock.Object, mapper, new DaprClientBuilder().Build());
+            var gameService = new GameService(gameDomainEntitiesMock.Object, mapper, new DaprClientBuilder().Build());
 
             //act
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Domain.Abstractions;
+using Domain.Contracts;
 using Domain.Models;
 using Infrastructure.Gateway.Options;
 

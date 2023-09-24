@@ -1,12 +1,11 @@
 {
   "profiles": {
-    "RWS.Gaming.Api": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:59613;http://localhost:59614"
+
+    "dapr": {
+      "commandName": "Executable",
+      "workingDirectory": "$(ProjectDir)",
+      "executablePath": "dapr.exe",
+      "commandLineArgs": "run --app-id gaming-api --dapr-http-port 3500 --app-ssl --resources-path ../components/ --app-port 59613 -- dotnet run ."
     }
   }
 }

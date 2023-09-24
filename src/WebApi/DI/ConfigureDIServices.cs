@@ -1,8 +1,8 @@
 ﻿
 using API.Options;
 using Application.Services;
-using Domain.Context;
-using Domain.Abstractions;
+using Domain.DomainEntities;
+using Domain.Contracts;
 using Infrastructure.Gateway.Options;
 using Infrastructure.Gateway;
 using Dapr.Client;
@@ -26,18 +26,20 @@ namespace API.DI
 
             
 
-            //Add Domain Contexts
+            //Add Domain DomainEntitiess
 
-            services.AddTransient<IGameContext, GameContext>();
+            services.AddTransient<IGameDE, GameDE>();
 
             //Add Application Services 
 
             services.AddTransient<IGameService, GameService>();
 
             services.AddHttpClient();
-            services.AddDaprClient(services => services.Build());
+            services.AddDaprClient(services => services.Build()); // Replace with your Dapr HTTP port
+      // Replace with your Dapr gRPC port.Build());
 
-           
+
+
 
             return services;
         }

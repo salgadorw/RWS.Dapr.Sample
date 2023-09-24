@@ -1,7 +1,7 @@
 ﻿using Domain;
 using Domain.Models;
 
-namespace Domain.Abstractions
+namespace Domain.Contracts
 {
     public interface IFeedGateway
     {
