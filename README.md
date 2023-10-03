@@ -1,4 +1,3 @@
-![image](https://github.com/salgadorw/RWS.Dapr.Sample/assets/4457435/3f718d78-c82b-482f-985c-3a59fec6d5ba)
 # Dapr Sample Rafael Willwohl Salgado
 
 The solution has 4 projects that help to apply the DDD with clean architecture and solid principles.
