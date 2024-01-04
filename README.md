@@ -1,7 +1,7 @@
 # Dapr Sample Rafael Willwohl Salgado
 
 The solution has 4 projects that help to apply the DDD with clean architecture and solid principles.
-It's using Dapr cache store, so to run it please install the Dapr CLI https://docs.dapr.io/getting-started/install-dapr-cli/ 
+It's using the Dapr cache store, so to run it please install the Dapr CLI https://docs.dapr.io/getting-started/install-dapr-cli/ 
 
 # Assumptions 
 
